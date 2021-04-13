@@ -65,7 +65,9 @@ const updateAvatar = (req, res) => {
     .orFail()
     .then((user) => res.status(200).send(user))
     .catch((err) => {
-      if (err.name === 'ValidationError') {
+      if (err.message === 'NotValidId') {
+        res.status(404).send({ message: 'Такого пользователя нет' });
+      } else if (err.name === 'ValidationError') {
         res.status(400).send({ message: 'Переданы некорректные данные' });
       } else {
         res.status(500).send({ message: 'Произошла ошибка' });
