@@ -3,15 +3,15 @@ const mongoose = require('mongoose');
 const cardSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Поле обязательно для заполнения'],
+    required: [true, 'Обязательное поле для заполнения'],
     minlength: [2, 'Введите не менее двух символов'],
     maxlength: [30, 'Введите не более 30 символов'],
   },
   link: {
     type: String,
-    required: [true, 'Поле обязательно для заполнения'],
+    required: [true, 'Обязательное поле для заполнения'],
     validate: {
-      validator: (v) => /^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-/])*)?/.test(v),
+      validator: (v) => /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([/\w\W.-]*)#?$/g.test(v),
       message: 'Введите ссылку',
     },
   },
